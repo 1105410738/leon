@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int a[3] = { 4, 2, 1,  }, t, p ;
+	
+	for (int i = 1; i <3; i++)//共比较3-1次
+	{
+		for (p=0;p<3-i ; p++)//相邻元素依次比较（在循环里初始化p可以让p在下一次使用时归零）
+		{
+			if (a[p] > a[p+1])
+			{
+				t = a[p];
+				a[p] = a[p+1];
+				a[p+1] = t;
+				
+			}
+		}
+		
+	}
+	for (int z = 0; z < 3; z++){
+		cout << a[z];
+		cout << endl;
+	}
+	return 0;
+}
