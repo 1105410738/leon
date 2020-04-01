@@ -1,0 +1,116 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+string add(string a, string b)
+{
+	int pa = a.length();
+	int pb = b.length();
+	int pc = (b.length() - a.length());
+	if (a.length() > b.length())
+	{
+		for (int i = 1; i <= (pa - pb); i++)
+		{
+			b = "0" + b;
+		}
+	}
+
+	else if (b.length() > a.length())
+	{
+		for (int i = 1; i <= (pc); i++)
+		{
+			a = "0" + a;
+		}
+	}
+
+	string e;
+	int len = b.length();
+	int temp = 0;
+	int sum;
+	for (int i=len-1;i>=0;i--)
+	{
+		sum = (int)(a[i] - '0') + (int)(b[i] - '0') + temp;
+		temp = sum / 10;
+		sum = sum % 10;
+		e =(char)(sum+'0')+e;
+	}
+	if (temp != 0){ e = (char)(temp+'0') + e; }
+	return e;
+}
+
+
+
+int main()
+{
+	string a, b;
+	cin >> a >> b;
+	int biaoji;
+	int pa = a.length();
+	int pb = b.length();
+	int pc = (b.length() - a.length());
+/*	if (a.length() > b.length())
+	{
+		for (int i = 1; i <= (pa - pb); i++)
+		{
+			b = "0" + b;
+		}
+	}
+	else if (b.length() > a.length())
+	{
+		for (int i = 1; i <= (pc); i++)
+		{
+			a = "0" + a;
+		}
+	}*/
+	if (pa < pb){ swap(a, b); swap(pa, pb); }
+	int sum = 0;
+	int temp = 0;
+	string e[10000];
+		if (a.length() > b.length())
+	{
+	for (int i = 1; i <= (pa - pb); i++)
+	{
+	b = "0" + b;
+	}
+	}
+	else if (b.length() > a.length())
+	{
+	for (int i = 1; i <= (pc); i++)
+	{
+	a = "0" + a;
+	}
+	}
+	for (int i1 = b.length() - 1; i1 >= 0; i1--)
+	{
+		for (int i2 = 0; i2 < a.length()-1-i1; i2++)
+		{
+			e[i1] = e[i1] + '0';
+		}
+		for (int i = a.length() - 1; i >= 0; i--)
+		{
+
+			sum = (int)(a[i] - '0')*(int)(b[i1] - '0') + temp;
+			temp = sum / 10;
+			sum %= 10;
+			e[i1] = (char)(sum+'0') + e[i1];
+		}
+		if (temp != 0){ e[i1] = (char)(temp + '0') + e[i1]; }
+	}
+	string su;
+	//if (pb == 1){ cout << e[0]; }
+	//else
+	//{
+		int g = 0;
+		for (int i = a.length() - 1; i >= 0; i--)
+		{
+			su = add(su, e[i]);
+		}
+		for (int i = 0; i < su.length(); i++)
+		{
+			if ((su[i] == '0') && (i != su.length()-1)&&(g==0)){ ; }
+			else{ cout << su[i]; g++; }
+		}
+	//}
+
+		return 0;
+}
